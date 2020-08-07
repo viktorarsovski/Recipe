@@ -1,1 +1,7 @@
-<h1>This is the placeholder for the recipes index</h1>
+<h1>Recipes</h1>
+
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li> <%= recipe.title %> </li>
+  <% end %>
+</ul>
