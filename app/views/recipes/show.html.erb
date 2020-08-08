@@ -3,3 +3,4 @@
 <p> <%= @recipe.description %> </p>
 <%= link_to "Back", root_path, class: "button button-default" %>
 <%= link_to "Edit", edit_recipe_path, class: "button button-default" %>
+<%= link_to "Delete", recipe_path, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" } %>
