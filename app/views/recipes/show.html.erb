@@ -1,5 +1,12 @@
-<h1> <%= @recipe.title %> </hi>
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-3">
+        <h1> <%= @recipe.title %> </hi>
+        <p> <%= @recipe.description %> </p>
+      </div>
+    </div>
 
-<p> <%= @recipe.description %> </p>
-
-<%= render @recipe, show: true %>
+    <%= render @recipe, show: true %>
+  </div>
+</div>
