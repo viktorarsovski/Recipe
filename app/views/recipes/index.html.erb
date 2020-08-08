@@ -1,11 +1,11 @@
-<h1>Recipes</h1>
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-3">
+        <h1>Recipes</h1>
+      </div>
+    </div>
 
-<%= link_to "New Recipe", new_recipe_path %>
-
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li>
-     <%= link_to recipe.title, recipe_path(recipe) %>
-    </li>
-  <% end %>
-</ul>
+     <%= render @recipes %>
+   </div>
+</div>
