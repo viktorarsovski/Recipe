@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
-  before_action :find_article, except: [:index, :new, :create]
+  before_action :find_recipe, except: [:index, :new, :create]
 
   def index
     @recipes = Recipe.all.order("created_at DESC")
@@ -35,6 +35,7 @@ class RecipesController < ApplicationController
     unless equal_with_current_user?(@recipe.user)
       flash[:danger] = 'Wrong User'
       redirect_to(root_path) and return
+    end
 
     if @recipe.update(recipe_params)
       redirect_to @recipe
@@ -56,13 +57,15 @@ class RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description)
+    params.require(:recipe).permit(:title, :description, :image)
   end
 
   def find_recipe
     @recipe = Recipe.find(params[:id])
   end
 end
+
+
 
 
 

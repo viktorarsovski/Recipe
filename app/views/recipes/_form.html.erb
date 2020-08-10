@@ -31,14 +31,20 @@
           </div>
         </div>
 
+         <div class="field">
+          <%= form.label :image, class: "label" %>
+          <div class="control">
+            <%= form.file_field :image, class: "input", placeholder: "Image" %>
+          </div>
+        </div>
 
         <div class="field">
           <%= form.label :description, class: "label" %>
-
           <div class="control">
             <%= form.text_area :description, class: "textarea", placeholder: 'Description' %>
           </div>
         </div>
+
         <div class="field is-grouped">
           <div class="control">
             <%= form.submit submit, class: "button is-link" %>

@@ -3,6 +3,7 @@
     <div class="column is-6 is-offset-3">
       <div class="content is-size-3">
         <h1> <%= @recipe.title %> </hi>
+        <%= image_tag @recipe.image.url(:medium, class: "recipe_image") %>
       </div>
     </div>
 
