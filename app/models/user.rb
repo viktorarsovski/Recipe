@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  has_many :recipes, dependent: :destroy
+
   before_save :email_to_downcase
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -17,5 +19,6 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 end
+
 
 

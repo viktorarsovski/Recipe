@@ -14,8 +14,9 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <%= link_to "New Recipe", new_recipe_path, class: "button is-danger is-rounded" %>
              <% if logged_in? %>
+            <%= link_to "New Recipe", new_recipe_path, class: "button is-danger is-rounded" %>
+
             <%= link_to "Log Out", logout_path, method: :delete, class: "button is-info is-rounded" %>
              <% else %>
             <%= link_to "Log In", login_path, class: "button is-rounded" %>
@@ -27,4 +28,5 @@
     </div>
   </nav>
 </div>
+
 

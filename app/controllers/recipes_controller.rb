@@ -9,11 +9,14 @@ class RecipesController < ApplicationController
   end
 
   def new
+    session_notice(:danger, 'You must be logged in!') unless logged_in?
+
     @recipe = Recipe.new
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
     if @recipe.save
       redirect_to @recipe, notice: 'Successfullu created new recipe'
@@ -23,6 +26,10 @@ class RecipesController < ApplicationController
   end
 
   def edit
+    session_notice(:danger, 'You must be logged in!') unless logged_in?
+
+    @recipe = Recipe.find(params[:id])
+    session_notice(:danger, 'Wrong User') unless equal_with_current_user?(@recipe.user)
   end
 
   def update
@@ -34,9 +41,16 @@ class RecipesController < ApplicationController
   end
 
   def destroy
+    session_notice(:danger, 'You must be logged in!') unless logged_in?
+
     @recipe = Recipe.find(params[:id])
-    @recipe.destroy
-    redirect_to recipes_path, notice: 'Successfully deleted recipe'
+
+    if equal_with_current_user?(recipe.user)
+      recipe.destroy
+      redirect_to recipes_path
+    else
+      session_notice(:danger, 'Wrong User')
+    end
   end
 
   private
@@ -49,3 +63,4 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 end
+

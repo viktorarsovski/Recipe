@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    logged_in_notice if logged_in?
+    session_notice('warning', 'Already logged in!') if logged_in?
   end
 
   def create
@@ -22,3 +22,4 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 end
+
