@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :find_recipe, only: [:show, :edit, :update,:destroy]
+  skip_before_action :require_login, only: [:index, :show]
+  before_action :find_article, except: [:index, :new, :create]
 
   def index
     @recipes = Recipe.all.order("created_at DESC")
@@ -9,8 +10,6 @@ class RecipesController < ApplicationController
   end
 
   def new
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
-
     @recipe = Recipe.new
   end
 
@@ -19,20 +18,24 @@ class RecipesController < ApplicationController
     @recipe.user = current_user
 
     if @recipe.save
-      redirect_to @recipe, notice: 'Successfullu created new recipe'
+      redirect_to @recipe, notice: 'Successfully created new recipe'
     else
       render :new
     end
   end
 
   def edit
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
-
-    @recipe = Recipe.find(params[:id])
-    session_notice(:danger, 'Wrong User') unless equal_with_current_user?(@recipe.user)
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+    end
   end
 
   def update
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+
     if @recipe.update(recipe_params)
       redirect_to @recipe
     else
@@ -41,15 +44,12 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    session_notice(:danger, 'You must be logged in!') unless logged_in?
-
-    @recipe = Recipe.find(params[:id])
-
-    if equal_with_current_user?(recipe.user)
-      recipe.destroy
+    if equal_with_current_user?(@recipe.user)
+      @recipe.destroy
       redirect_to recipes_path
     else
-      session_notice(:danger, 'Wrong User')
+       flash[:danger] = 'Wrong User'
+      redirect_to(root_path)
     end
   end
 
@@ -63,4 +63,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 end
+
+
+
+
+
 
