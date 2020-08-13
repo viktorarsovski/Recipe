@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
   before_action :find_recipe, except: [:index, :new, :create]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all.order("created_at DESC")
@@ -22,7 +23,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       redirect_to @recipe, notice: 'Successfully created new recipe'
     else
-      flash[:danger] = 'You must save'
+      flash[:danger] = 'You can\'t save empty recipe'
       render :new
     end
   end
@@ -57,6 +58,48 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit_ingredients
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+    end
+
+    8.times { @recipe.ingredients.build }
+  end
+
+  def update_ingredients
+    unless same_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+    end
+    if @recipe.ingredients.update(ingredient_params)
+      redirect_to @recipe
+    else
+      render :edit_ingredients
+    end
+  end
+
+  def edit_directions
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+    end
+
+    6.times { @recipe.directions.build }
+  end
+
+  def update_instructions
+    unless same_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path) and return
+    end
+    if @recipe.instructions.update(instruction_params)
+      redirect_to @recipe
+    else
+      render :edit_instructions
+    end
+  end
+
   private
 
   def recipe_params
@@ -66,7 +109,19 @@ class RecipesController < ApplicationController
   def find_recipe
     @recipe = Recipe.find(params[:id])
   end
+
+  def correct_user
+    unless equal_with_current_user?(@recipe.user)
+      flash[:danger] = 'Wrong User'
+      redirect_to(root_path)
+    end
+  end
+
+  def instruction_params
+    params.permit(:name)
+  end
 end
+
 
 
 

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-3">
+      <%= form_with model: @recipe, local: true  do |form| %>
+      <p>Directions:</p>
+      <%= form.fields_for :directions do |direction| %>
+        <%= direction.text_field :step %>
+        <%= direction.check_box :_destroy %> Delete
+      <% end %>
+      <div class="form-group">
+        <%= form.submit "Update", class: 'button is-link is-round' %>
+        <%= link_to 'Cancel', recipe_path, class: 'button is-link is-round' %>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

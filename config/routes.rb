@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   root 'recipes#index'
 
   resources :recipes
+  get '/recipes/:id/edit_ingredients', to: 'recipes#edit_ingredients', as: :edit_ingredients
+  patch '/recipes/:id', to: 'recipes#update_ingredients'
+
+  get '/recipes/:id/edit_directions', to: 'recipes#edit_directions', as: :edit_directions
+  patch '/recipes/:id', to: 'recipes#update_directions'
 
   get 'users/signup', to: 'users#new'
   resources :users, except: :new

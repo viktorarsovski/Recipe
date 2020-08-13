@@ -11,9 +11,10 @@ class Recipe < ApplicationRecord
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   belongs_to :user
-  validates :title, presence: true, length: { minimum: 5 }
-  validates :description, presence: true, length: { maximum: 100 }
+
+  validates :title, :description, :image, presence: true
 end
+
 
 
 

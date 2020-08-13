@@ -6,11 +6,36 @@
           <% if @recipe.image.present? %>
             <p><%= image_tag @recipe.image.url(:medium) %></p>
           <% end %>
-        <small class="text-muted"><%= "Created at: #{@recipe.created_at.strftime("%d.%m.%Y, %H:%M")} | by: #{@recipe.user.name}"%></small>
+        <small class="text-muted"><%= "Created at: #{@recipe.created_at.strftime("%d.%m.%Y, %H:%M")} | by:"%></small>
+        <%= link_to @recipe.user.name, user_path(@recipe.user) %>
+      <div class="content is-size-6">
+        <br/>
+         Ingredients:
+       <p><% @recipe.ingredients.each do |ingredient| %>
+       <ul>
+        <li>
+        <%= ingredient.name %>
+        </li>
+       </ul>
+        <% end %>
+         <%= link_to 'Edit Ingredients', edit_ingredients_path, class: 'button is-link is-round' if equal_with_current_user?(@recipe.user) %>
+      </p>
+
+      Directions:
+      <p><% @recipe.directions.each do |direction| %>
+       <ul>
+        <li>
+        <%= direction.step %>
+        </li>
+       </ul>
+        <% end %>
+        <%= link_to 'Edit Directions', edit_directions_path, class: 'button is-link is-round' if equal_with_current_user?(@recipe.user) %>
+      </p>
       </div>
+      </div>
+      Description:
     </div>
         <%= render @recipe, show: true %>
-        <%= render 'nested' %>
   </div>
 </div>
 
