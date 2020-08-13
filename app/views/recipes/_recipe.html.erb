@@ -12,6 +12,17 @@
         <p><%= recipe.description %></p>
       </div>
     </div>
+
+    <p class="card-text"> <% recipe.ingredients.each do |ingredient| %>
+        <%= ingredient.name %>
+        <% end %>
+    </p>
+
+    <p class="card-text"> <% recipe.directions.each do |direction| %>
+        <%= direction.name %>
+        <% end %>
+    </p>
+
     <footer class="card-footer">
       <% if local_assigns[:show] %>
         <%= link_to "Back", root_path, class: "card-footer-item" %>

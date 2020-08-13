@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_162552) do
+ActiveRecord::Schema.define(version: 2020_08_11_194049) do
+
+  create_table "directions", force: :cascade do |t|
+    t.text "step"
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "recipes_id"
+    t.index ["recipe_id"], name: "index_directions_on_recipe_id"
+    t.index ["recipes_id"], name: "index_directions_on_recipes_id"
+  end
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string "name"
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "recipes_id"
+    t.index ["recipe_id"], name: "index_ingredients_on_recipe_id"
+    t.index ["recipes_id"], name: "index_ingredients_on_recipes_id"
+  end
 
   create_table "recipes", force: :cascade do |t|
     t.string "title"
@@ -32,7 +52,12 @@ ActiveRecord::Schema.define(version: 2020_08_10_162552) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "directions", "recipes"
+  add_foreign_key "directions", "recipes", column: "recipes_id"
+  add_foreign_key "ingredients", "recipes"
+  add_foreign_key "ingredients", "recipes", column: "recipes_id"
 end

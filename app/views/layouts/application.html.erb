@@ -9,13 +9,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="background">
     <section class="section">
       <%= render 'shared/nav_bar' %>
-      <%= image_tag("background/background.png" ) %>
       <%= render 'shared/flash' %>
       <%= yield %>
     </section>
   </body>
 </html>
+
 

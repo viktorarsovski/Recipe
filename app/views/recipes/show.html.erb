@@ -2,11 +2,17 @@
   <div class="columns is-multiline">
     <div class="column is-6 is-offset-3">
       <div class="content is-size-3">
-        <h1> <%= @recipe.title %> </hi>
-        <%= image_tag @recipe.image.url(:medium, class: "recipe_image") %>
+        <h1> <%= @recipe.title %> </h1>
+          <% if @recipe.image.present? %>
+            <p><%= image_tag @recipe.image.url(:medium) %></p>
+          <% end %>
+        <small class="text-muted"><%= "Created at: #{@recipe.created_at.strftime("%d.%m.%Y, %H:%M")} | by: #{@recipe.user.name}"%></small>
       </div>
     </div>
-
-    <%= render @recipe, show: true %>
+        <%= render @recipe, show: true %>
+        <%= render 'nested' %>
   </div>
 </div>
+
+
+

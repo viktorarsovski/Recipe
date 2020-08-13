@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="columns is-multiline">
+    <div class="column is-6 is-offset-3">
+      <div class="content is-size-5">
+
+      <%= form_with model: @recipe do |form| %>
+       Ingredients:
+          <ul>
+            <%= form.fields_for (:ingredients) do |ingredients_form| %>
+          <li>
+            <%= ingredients_form.label :name %>
+            <%= ingredients_form.text_area :name %>
+            <%= ingredients_form.check_box :_destroy %>
+           ...
+          </li>
+            <% end %>
+          </ul>
+      <% end %>
+
+      <br/>
+
+      <%= form_with model: @recipe do |form| %>
+       Directions:
+          <ul>
+            <%= form.fields_for (:directions) do |directions_form| %>
+          <li>
+            <%= directions_form.label :step %>
+            <%= directions_form.text_area :step %>
+            <%= directions_form.check_box :_destroy %>
+          ...
+          </li>
+            <% end %>
+          </ul>
+      <% end %>
+     </div>
+    </div>
+  </div>
+</div>
