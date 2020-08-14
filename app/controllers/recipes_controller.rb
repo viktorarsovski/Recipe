@@ -63,40 +63,12 @@ class RecipesController < ApplicationController
       flash[:danger] = 'Wrong User'
       redirect_to(root_path) and return
     end
-
-    8.times { @recipe.ingredients.build }
-  end
-
-  def update_ingredients
-    unless same_user?(@recipe.user)
-      flash[:danger] = 'Wrong User'
-      redirect_to(root_path) and return
-    end
-    if @recipe.ingredients.update(ingredient_params)
-      redirect_to @recipe
-    else
-      render :edit_ingredients
-    end
   end
 
   def edit_directions
     unless equal_with_current_user?(@recipe.user)
       flash[:danger] = 'Wrong User'
       redirect_to(root_path) and return
-    end
-
-    6.times { @recipe.directions.build }
-  end
-
-  def update_instructions
-    unless same_user?(@recipe.user)
-      flash[:danger] = 'Wrong User'
-      redirect_to(root_path) and return
-    end
-    if @recipe.instructions.update(instruction_params)
-      redirect_to @recipe
-    else
-      render :edit_instructions
     end
   end
 
@@ -121,14 +93,3 @@ class RecipesController < ApplicationController
     params.permit(:name)
   end
 end
-
-
-
-
-
-
-
-
-
-
-

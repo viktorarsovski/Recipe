@@ -20,6 +20,3 @@ class User < ApplicationRecord
     self.email = email.downcase
   end
 end
-
-
-

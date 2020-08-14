@@ -22,5 +22,3 @@ module SessionsHelper
     current_user == other_user
   end
 end
-
-

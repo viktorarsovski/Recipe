@@ -5,6 +5,15 @@
         <h3><%= @user.name %></h3>
         <p><%= @user.email %></p>
         <p><small>Username:</small> <%= @user.username %></p>
+          <div class="content is-size-6">
+              <p>
+                <% @user.recipes.each do |recipe| %>
+                  <tr>
+                    <p><%= render 'recipes/recipe', recipe: recipe %></p>
+                  </tr>
+                <% end %>
+              </p>
+          </div>
       </div>
     </div>
   </div>
