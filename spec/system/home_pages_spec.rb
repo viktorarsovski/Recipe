@@ -47,20 +47,20 @@ RSpec.describe "HomePages" do
     end
   end
 
-  context 'when the recipe is present' do
+  context 'when recipe is present' do
     let!(:recipe) { create(:recipe, title: 'Testing with RSpec', description: 'Testing recipe body') }
 
     before do
       visit root_path
     end
 
-    it 'shows the recipe title' do
+    it 'shows recipe title' do
       expecting = page.has_content?(recipe.title)
 
       expect(expecting).to be true
     end
 
-    it 'shows the recipe body' do
+    it 'shows recipe body' do
       expecting = page.has_content?(recipe.description)
 
       expect(expecting).to be true

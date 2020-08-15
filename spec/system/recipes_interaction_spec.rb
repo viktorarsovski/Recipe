@@ -12,7 +12,7 @@ RSpec.describe "RecipesInteraction" do
     # visit recipe_path(recipe)
   end
 
-  describe 'Creating the recipe' do
+  describe 'Creating recipe' do
     it 'creates and shows the newly created recipe' do
       title = 'Red Velvet Strawberry Cake'
       body = 'I made this strawberry cake'
@@ -31,7 +31,7 @@ RSpec.describe "RecipesInteraction" do
     end
   end
 
-  describe 'Editing the recipe' do
+  describe 'Editing recipe' do
     it 'edits and shows the recipe' do
       title = 'New Title'
       body = 'New Body'
@@ -52,7 +52,7 @@ RSpec.describe "RecipesInteraction" do
     end
   end
 
-  describe 'Deleting the recipe' do
+  describe 'Deleting recipe' do
     it 'deletes the recipe and redirect to index view' do
       visit recipe_path(recipe)
 
@@ -63,7 +63,7 @@ RSpec.describe "RecipesInteraction" do
       # end
 
       # If using rack_test driver, uncomment this block
-      # click_on 'Delete'
+       click_on 'Delete'
 
       expect(page).to have_content('Recipes')
     end
