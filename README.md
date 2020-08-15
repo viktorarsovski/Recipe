@@ -34,7 +34,7 @@ bundle install
 
 # Server
 
-From the comman line start the local server Puma
+From the command line start the local server Puma
 
 rails s
 
