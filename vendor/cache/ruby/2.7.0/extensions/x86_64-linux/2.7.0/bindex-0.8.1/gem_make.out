@@ -1,0 +1,15 @@
+current directory: /home/viktor_arso/Projects/Recipe_app/vendor/cache/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+/home/viktor_arso/.rbenv/versions/2.7.0/bin/ruby -I /home/viktor_arso/.rbenv/versions/2.7.0/lib/ruby/2.7.0 -r ./siteconf20210108-31422-12ebn9j.rb extconf.rb
+creating Makefile
+
+current directory: /home/viktor_arso/Projects/Recipe_app/vendor/cache/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /home/viktor_arso/Projects/Recipe_app/vendor/cache/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /home/viktor_arso/Projects/Recipe_app/vendor/cache/ruby/2.7.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20210108-31422-1mvoz8a/skiptrace/internal
